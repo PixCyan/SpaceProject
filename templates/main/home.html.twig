@@ -1,15 +1,20 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Accueil{% endblock %}
+
 {% block body %}
     <section id="main">
         <h1>Bienvenue</h1>
-        <div id="homeChoices">
-            <a href="">
+        <div class="homeChoices">
+            <a title="Connexion" href="{{ path('app_login') }}">
                 <div>
                     <p>Connexion</p>
                 </div>
             </a>
-            <a href="">
+        </div>
+
+        <div class="homeChoice">
+            <a title="Nouvel utilisateur" href="{{ path('app_register') }}">
                 <div>
                     <p>Nouvel utilisateur</p>
                 </div>

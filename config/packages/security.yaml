@@ -1,7 +1,6 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory: { memory: ~ }
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
@@ -13,6 +12,11 @@ security:
             security: false
         main:
             anonymous: true
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+            logout:
+                path: /logout
 
             # activate different ways to authenticate
 
@@ -30,4 +34,4 @@ security:
 
     encoders:
         App\Entity\User:
-            algorithm: argon2i
+            algorithm: bcrypt
