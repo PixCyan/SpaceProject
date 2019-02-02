@@ -86,20 +86,11 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="security_logout")
+     * @Route("/logout", name="app_logout")
      */
     public function logoutAction()
     {
         throw new \Exception('this should not be reached!');
     }
 
-    /**
-     * @Route("/station", name="app_main")
-     *
-     * @return Response
-     */
-    public function mainpage()
-    {
-        return $this->render('main/main.html.twig');
-    }
 }
