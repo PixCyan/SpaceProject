@@ -23,6 +23,19 @@ class StationController extends AbstractController
      */
     public function mainpage()
     {
-        return $this->render('main/main.html.twig');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        if ($this->getUser()) {
+            /*
+             * TODO -- 1
+             *  Si l'utilisateur viens de s'enregistrer
+             *  -> Début de dialogue avec Tétrys pour donner le contexte + choix conversation
+             *  Si l'utilisateur a déjà eu le dialogue de Tétrys
+             *  -> Choix dialogue avec Tétrys ou panneau de contrôl
+             */
+            return $this->render('main/main.html.twig');
+        } else {
+            return $this->redirectToRoute('app_home');
+        }
     }
 }

@@ -10,6 +10,12 @@
     <section id="main">
         <h1>Bienvenue {%  if username is defined %} {{ app.user.name }} {%  endif %}</h1>
         {%  if username is defined %}
+            <a title="Retour à la station" href="{{ path('app_main') }}">
+                <div>
+                    <p>Revenir à la station</p>
+                </div>
+            </a>
+
             {% include 'main/logout.html.twig' %}
         {% else %}
             <div class="homeChoices">
