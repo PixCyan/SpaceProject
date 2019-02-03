@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section id="main">
+        <h1>Bienvenue</h1>
+
+        {% include 'registration/register.html.twig' %}
+
+        <a title="Retour à la page d'accueil" href="{{ path('app_home') }}">
+            <div>
+                <p>Revenir à la page d'acceuil</p>
+            </div>
+        </a>
+    </section>
+{% endblock %}

@@ -1,19 +1,38 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Accueil{% endblock %}
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+{% set username = app.user.name %}
+{% endif %}
+
 {% block body %}
     <section id="main">
-        <h1>Bienvenue</h1>
-        <div id="homeChoices">
-            <a href="">
+        <h1>Bienvenue {%  if username is defined %} {{ app.user.name }} {%  endif %}</h1>
+        {%  if username is defined %}
+            <a title="Retour à la station" href="{{ path('app_main') }}">
                 <div>
-                    <p>Connexion</p>
+                    <p>Revenir à la station</p>
                 </div>
             </a>
-            <a href="">
-                <div>
-                    <p>Nouvel utilisateur</p>
-                </div>
-            </a>
-        </div>
+
+            {% include 'main/logout.html.twig' %}
+        {% else %}
+            <div class="homeChoices">
+                <a title="Connexion" href="{{ path('app_login') }}">
+                    <div>
+                        <p>Connexion</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="homeChoice">
+                <a title="Nouvel utilisateur" href="{{ path('app_register') }}">
+                    <div>
+                        <p>Nouvel utilisateur</p>
+                    </div>
+                </a>
+            </div>
+        {% endif %}
     </section>
 {% endblock %}
