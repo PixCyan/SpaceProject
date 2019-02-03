@@ -2,16 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\RobotA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use App\Entity\User;
-use App\Form\RegistrationFormType;
-use App\Security\LoginFormAuthenticator;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 class StationController extends AbstractController
 {
@@ -29,13 +23,33 @@ class StationController extends AbstractController
             /*
              * TODO -- 1
              *  Si l'utilisateur viens de s'enregistrer
-             *  -> Début de dialogue avec Tétrys pour donner le contexte + choix conversation
+             *  -> Début de dialogue avec Tétrys pour donner le contexte + choix conversations
              *  Si l'utilisateur a déjà eu le dialogue de Tétrys
              *  -> Choix dialogue avec Tétrys ou panneau de contrôl
              */
-            return $this->render('main/main.html.twig');
+
+            //$this->addRobot();
+
+            return $this->render('station/station.html.twig');
         } else {
             return $this->redirectToRoute('app_home');
         }
+    }
+
+    /**
+     * TEST
+     */
+    public function addRobot()
+    {
+        //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $currentUser = $this->getUser();
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $robot = new RobotA();
+        $robot->setUser($currentUser);
+        $currentUser->addRobot($robot);
+
+        $entityManager->persist($robot);
+        $entityManager->flush();
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -31,15 +33,32 @@ class User implements UserInterface
 
     /**
      * @var string The hashed password
+     *
      * @ORM\Column(type="string")
      */
     private $password;
 
     /**
      * @var boolean new user
+     *
      * @ORM\Column(type="boolean")
      */
     private $isNew = true;
+
+    /**
+     * @var Robot
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Robot", mappedBy="user")
+     */
+    private $robots = [];
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->robots = new ArrayCollection();
+    }
 
     /**
      * @return int|null
@@ -137,6 +156,30 @@ class User implements UserInterface
     public function setIsNew(bool $isNew): void
     {
         $this->isNew = $isNew;
+    }
+
+    /**
+     * @return Collection|Robot[]
+     */
+    public function getRobots(): Collection
+    {
+        return $this->robots;
+    }
+
+    /**
+     * @param Robot $robot
+     */
+    public function addRobot(Robot $robot): void
+    {
+        $this->robots[] = $robot;
+    }
+
+    /**
+     * @param Robot $robot
+     */
+    public function removeRobot(Robot $robot): void
+    {
+        $this->robots->remove($robot);
     }
 
     /**
