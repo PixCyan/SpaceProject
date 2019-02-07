@@ -18,6 +18,7 @@ abstract class Robot
     const TYPE_SPEED = "Rapide";
     const TYPE_AVERAGE_SPEED = "Moyen";
     const TYPE_SLOW = "Lent";
+    const TYPE_TRADING = "Marchand"; //TODO vaisseau permettant d'apporter des ressources de quête
 
     /**
      * @ORM\Id()
@@ -65,9 +66,9 @@ abstract class Robot
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="robots")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="robots")
      */
-    protected $user;
+    private $user;
 
     //TODO coût des robots avec les matériaux associés -- table à part pour faire la correspondance
 

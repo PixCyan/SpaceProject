@@ -46,11 +46,31 @@ class User implements UserInterface
     private $isNew = true;
 
     /**
-     * @var Robot
+     * @var int
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Robot", mappedBy="user")
+     * @ORM\Column(type="integer")
      */
-    private $robots = [];
+    private $level = 0;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     */
+    private $expercience = 0;
+
+    /**
+     * @var int
+     *
+     * Définit le nombre de robots autorisés pour le joueur
+     * @ORM\Column(type="integer")
+     */
+    private $robotsLimit = 3;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Robot", mappedBy="user")
+     */
+    private $robots;
 
     /**
      * User constructor.
@@ -159,6 +179,54 @@ class User implements UserInterface
     }
 
     /**
+     * @return int
+     */
+    public function getLevel(): int
+    {
+        return $this->level;
+    }
+
+    /**
+     * @param int $level
+     */
+    public function setLevel(int $level): void
+    {
+        $this->level = $level;
+    }
+
+    /**
+     * @return int
+     */
+    public function getExpercience(): int
+    {
+        return $this->expercience;
+    }
+
+    /**
+     * @param int $expercience
+     */
+    public function setExpercience(int $expercience): void
+    {
+        $this->expercience = $expercience;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRobotsLimit(): int
+    {
+        return $this->robotsLimit;
+    }
+
+    /**
+     * @param int $robotsLimit
+     */
+    public function setRobotsLimit(int $robotsLimit): void
+    {
+        $this->robotsLimit = $robotsLimit;
+    }
+
+    /**
      * @return Collection|Robot[]
      */
     public function getRobots(): Collection
@@ -171,7 +239,7 @@ class User implements UserInterface
      */
     public function addRobot(Robot $robot): void
     {
-        $this->robots[] = $robot;
+        $this->robots->add($robot);
     }
 
     /**
