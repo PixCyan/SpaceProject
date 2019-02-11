@@ -2,10 +2,6 @@
 
 {% block title %}Accueil{% endblock %}
 
-{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-{% set username = app.user.name %}
-{% endif %}
-
 {% block body %}
     <section id="main">
         <h1>Bienvenue {%  if username is defined %} {{ app.user.name }} {%  endif %}</h1>

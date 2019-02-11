@@ -37,6 +37,27 @@ class StationController extends AbstractController
     }
 
     /**
+     * @Route("/station/warehouse", name="app_warehouse")
+     *
+     * @return Response
+     */
+    public function showWerehouse()
+    {
+        //--- TODO
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $warehouse = [];
+
+        if ($this->getUser()) {
+            $user = $this->getUser();
+            $warehouse = $user->getWarehouse();
+        }
+
+        return $this->render('station/warehouse.html.twig', [
+            'warehouse' => $warehouse
+        ]);
+    }
+
+    /**
      * TEST
      */
     public function addRobot()

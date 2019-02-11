@@ -59,8 +59,6 @@ class User implements UserInterface
      */
     private $expercience = 0;
 
-    //TODO liaison avec les ressources (+ quantité possédée) --> Entrpot
-
     /**
      * @var int
      *
@@ -274,15 +272,27 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getResource(): ?Warehouse
+    /**
+     * @return Collection|Warehouse[]
+     */
+    public function getWarehouse(): Collection
     {
-        return $this->resource;
+        return $this->warehouse;
     }
 
-    public function setResource(?Warehouse $resource): self
+    /**
+     * @param Warehouse recipeComponent
+     */
+    public function addWarehouse(Warehouse $warehouse): void
     {
-        $this->resource = $resource;
+        $this->warehouse->add($warehouse);
+    }
 
-        return $this;
+    /**
+     * @param Warehouse recipeComponent
+     */
+    public function removeWarehouse(Warehouse $warehouse): void
+    {
+        $this->warehouse->remove($warehouse);
     }
 }

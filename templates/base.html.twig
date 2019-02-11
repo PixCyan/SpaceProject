@@ -6,7 +6,10 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {% set username = app.user.name %}
+        {% endif %}
+        {% block body %}{% endblock%}
         {% block javascripts %}{% endblock %}
     </body>
 </html>

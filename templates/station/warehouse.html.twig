@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <section id="main">
+        <h1>Entrpôt de {%  if username is defined %} {{ app.user.name }} {%  endif %}</h1>
+
+        {% if warehouse is defined and warehouse is not null %}
+            <table>
+
+                <thead>
+                <tr>
+                    <th>Ressource</th>
+                    <th>Quantité</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for resource in warehouse %}
+                    <tr>
+                        <td>{{ resource.resource.name }}</td>
+                        <td>{{ resource.quantity }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+
+            </table>
+        {% endif %}
+
+        <a title="Retour à la station" href="{{ path('app_main') }}">
+            <div>
+                <p>Revenir à la station</p>
+            </div>
+        </a>
+    </section>
+{% endblock %}

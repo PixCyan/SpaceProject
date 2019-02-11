@@ -4,7 +4,14 @@
 
 {% block body %}
     <section id="main">
-        <h1>Bienvenue</h1>
-        TEST
+        <h1>Bienvenue {%  if username is defined %} {{ app.user.name }} {%  endif %}</h1>
+
+        <div class="buttonChoice">
+            <a title="Voir ressources" href="{{ path('app_warehouse') }}">
+                <div>
+                    <p>Voir les ressources possédées</p>
+                </div>
+            </a>
+        </div>
     </section>
 {% endblock %}
