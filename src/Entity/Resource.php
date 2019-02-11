@@ -34,7 +34,7 @@ class Resource
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $picture;
 
@@ -57,6 +57,13 @@ class Resource
      * @ORM\OneToMany(targetEntity="RecipeComponent", mappedBy="resource")
      */
     private $recipeComponent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Warehouse", mappedBy="resource")
+     */
+    private $warehouse;
+
+    //TODO relation avec la zone
 
     /**
      * Resource constructor.
@@ -177,5 +184,29 @@ class Resource
     public function removeRecipeComponent(RecipeComponent $recipeComponent): void
     {
         $this->recipeComponent->remove($recipeComponent);
+    }
+
+    /**
+     * @return Collection|Warehouse[]
+     */
+    public function getWarehouse(): Collection
+    {
+        return $this->warehouse;
+    }
+
+    /**
+     * @param Warehouse recipeComponent
+     */
+    public function addWarehouse(Warehouse $warehouse): void
+    {
+        $this->warehouse->add($warehouse);
+    }
+
+    /**
+     * @param Warehouse recipeComponent
+     */
+    public function removeWarehouse(Warehouse $warehouse): void
+    {
+        $this->warehouse->remove($warehouse);
     }
 }

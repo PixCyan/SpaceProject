@@ -19,11 +19,6 @@ class Recipe
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $userRequiredLevel;
@@ -32,6 +27,13 @@ class Recipe
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $description;
+
+    /**
+     * @var Resource
+     *
+    * @ORM\OneToOne(targetEntity="Resource")
+    */
+    private $resource;
 
     /**
      *
@@ -53,22 +55,6 @@ class Recipe
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
-     */
-    public function setName($name): void
-    {
-        $this->name = $name;
     }
 
     /**
@@ -102,6 +88,23 @@ class Recipe
     {
         $this->description = $description;
     }
+
+    /**
+     * @return Resource
+     */
+    public function getResource()
+    {
+        return $this->resource;
+    }
+
+    /**
+     * @param Resource $resource
+     */
+    public function setResource($resource): void
+    {
+        $this->resource = $resource;
+    }
+
 
     /**
      * @return Collection|RecipeComponent[]

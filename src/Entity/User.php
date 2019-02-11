@@ -59,6 +59,8 @@ class User implements UserInterface
      */
     private $expercience = 0;
 
+    //TODO liaison avec les ressources (+ quantité possédée) --> Entrpot
+
     /**
      * @var int
      *
@@ -71,6 +73,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="Robot", mappedBy="user")
      */
     private $robots;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Warehouse", mappedBy="user")
+     */
+    private $warehouse;
 
     /**
      * User constructor.
@@ -265,5 +272,17 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getResource(): ?Warehouse
+    {
+        return $this->resource;
+    }
+
+    public function setResource(?Warehouse $resource): self
+    {
+        $this->resource = $resource;
+
+        return $this;
     }
 }
