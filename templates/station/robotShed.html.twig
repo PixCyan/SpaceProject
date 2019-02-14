@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <section id="main">
+        <h1>Entrpôt de {%  if username is defined %} {{ app.user.name }} {%  endif %}</h1>
+
+
+        <div id="options">
+            <a title="Fabriquer un robot" href="">
+                <div>
+                    <p>Fabriquer un nouveau robot</p>
+                </div>
+            </a>
+            <div>
+                <p>TODO:Filtrage</p>
+            </div>
+        </div>
+
+        <div id="list">
+            {% if robots is defined and robots is not null %}
+                <table>
+
+                    <thead>
+                    <tr>
+                        <th>Robot</th>
+                        <th>Type</th>
+                        <th>Etat</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for robot in robots %}
+                        <tr>
+                            <td>{{ robot.name }}</td>
+                            <td>{{ robot.type }}</td>
+                            <td>
+                                {% if robot.state == 1 %}
+                                    Bon état
+                                {% elseif robot.state == 2 %}
+                                    Abîmé
+                                {% else %}
+                                    Cassé
+                                {% endif %}
+                            </td>
+                            <td id="robotsOptions">
+                                <a title="Renommer" href="">
+                                    <div>
+                                        <p>Renommer</p>
+                                    </div>
+                                </a><a title="Réparer" href="">
+                                    <div>
+                                        <p>Réparer</p>
+                                    </div>
+                                </a><a title="Supprimer" href="">
+                                    <div>
+                                        <p>Supprimer</p>
+                                    </div>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+
+
+                </table>
+            {% endif %}
+        </div>
+
+        <a title="Retour à la station" href="{{ path('app_main') }}">
+            <div>
+                <p>Revenir à la station</p>
+            </div>
+        </a>
+    </section>
+{% endblock %}

@@ -7,7 +7,16 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Robot
  * @package App\Entity
- * @ORM\MappedSuperclass
+ *
+ * @ORM\Table(name="robots")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="discr", type="string")
+ * @ORM\DiscriminatorMap({
+ *     "robot_a" = "RobotA",
+ *     "robot_b" = "RobotB",
+ *     "robot_c" = "RobotC"
+ *  })
+ * @ORM\Entity(repositoryClass="App\Repository\RobotRepository")
  */
 abstract class Robot
 {

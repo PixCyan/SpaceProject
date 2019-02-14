@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<section id="main">
+    <h1>Fabriquer un robot</h1>
+    <form action="/{{ path('app_robot_shed') }}" method="post" class="create_robot">
+        <select>
+            <option value="robot_a">RobotA</option>
+            <option value="robot_b">RobotB</option>
+            <option value="robot_c">RobotC</option>
+        </select>
+
+        <div class="create_robot">
+            <input type="submit" value="Valider">
+        </div>
+    </form>
+</section>
+{% endblock %}

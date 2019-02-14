@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\RobotA;
+use App\Entity\RobotB;
+use App\Entity\RobotC;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,7 +45,7 @@ class StationController extends AbstractController
      */
     public function showWerehouse()
     {
-        //--- TODO
+        //--- TODO CCS/JS
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $warehouse = [];
 
@@ -58,15 +60,53 @@ class StationController extends AbstractController
     }
 
     /**
-     * TEST
+     * @Route("/station/robot_shed", name="app_robot_shed")
+     *
+     * @return Response
      */
-    public function addRobot()
+    public function showRobotShed()
+    {
+        //--- TODO CCS/JS
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $robots = [];
+
+        if ($this->getUser()) {
+            $user = $this->getUser();
+            $robots = $user->getRobots();
+        }
+
+        return $this->render('station/robotShed.html.twig', [
+            'robots' => $robots
+        ]);
+    }
+
+    /**
+     * @Route("/station/create_robot", name="app_create_robot")
+     *
+     * @param String $robotType
+     */
+    public function addRobot(String $robotType)
     {
         //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $currentUser = $this->getUser();
 
+        //TODO -- gestion du formulaire
+
+        $currentUser = $this->getUser();
         $entityManager = $this->getDoctrine()->getManager();
-        $robot = new RobotA();
+
+        switch ($robotType) {
+            default:
+            case "robot_a":
+                $robot = new RobotA();
+                break;
+            case "robot_b":
+                $robot = new RobotB();
+                break;
+            case "robot_c":
+                $robot = new RobotC();
+                break;
+        }
+
         $robot->setUser($currentUser);
         $currentUser->addRobot($robot);
 
