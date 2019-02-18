@@ -4,11 +4,11 @@
 
 {% block body %}
     <section id="main">
-        <h1>Entrpôt de {%  if username is defined %} {{ app.user.name }} {%  endif %}</h1>
-
+        <h1>Entrepôt de {%  if username is defined %} {{ app.user.name }} {%  endif %}</h1>
 
         <div id="options">
-            <a title="Fabriquer un robot" href="">
+            {# TODO voir si l'user peut accueillir des robots en plus#}
+            <a title="Fabriquer un robot" href="{{ path('app_create_robot') }}">
                 <div>
                     <p>Fabriquer un nouveau robot</p>
                 </div>
@@ -18,10 +18,9 @@
             </div>
         </div>
 
-        <div id="list">
+        <div id="robotsList">
             {% if robots is defined and robots is not null %}
                 <table>
-
                     <thead>
                     <tr>
                         <th>Robot</th>
@@ -50,11 +49,13 @@
                                     <div>
                                         <p>Renommer</p>
                                     </div>
-                                </a><a title="Réparer" href="">
+                                </a>
+                                <a title="Réparer" href="">
                                     <div>
                                         <p>Réparer</p>
                                     </div>
-                                </a><a title="Supprimer" href="">
+                                </a>
+                                <a title="Supprimer" href="{{ path('app_delete_robot', {'robotId': robot.id}) }}">
                                     <div>
                                         <p>Supprimer</p>
                                     </div>

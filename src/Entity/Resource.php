@@ -71,6 +71,7 @@ class Resource
     public function __construct()
     {
         $this->recipeComponent = new ArrayCollection();
+        $this->warehouse = new ArrayCollection();
     }
 
     public function getId(): ?int

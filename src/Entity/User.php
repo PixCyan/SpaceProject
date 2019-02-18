@@ -68,12 +68,12 @@ class User implements UserInterface
     private $robotsLimit = 3;
 
     /**
-     * @ORM\OneToMany(targetEntity="Robot", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Robot", mappedBy="user", cascade={"persist", "remove"})
      */
     private $robots;
 
     /**
-     * @ORM\OneToMany(targetEntity="Warehouse", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Warehouse", mappedBy="user", cascade={"persist", "remove"})
      */
     private $warehouse;
 
@@ -83,6 +83,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->robots = new ArrayCollection();
+        $this->warehouse = new ArrayCollection();
     }
 
     /**
@@ -252,6 +253,10 @@ class User implements UserInterface
      */
     public function removeRobot(Robot $robot): void
     {
+        if (!$this->robots->contains($robot)) {
+            return;
+        }
+
         $this->robots->remove($robot);
     }
 
